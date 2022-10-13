@@ -1,10 +1,19 @@
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { ListRenderItemInfo } from "react-native";
+import { useCallback } from "react";
 
 import { useReactNavigation } from "../../hooks/useReactNavigation";
 
 import { Loading } from "../Loading";
+import { Link } from "../Link";
 
 import type { CharacterData } from "../../types";
+import {
+	List,
+	CharacterImage,
+	Texts,
+	CharacterSpecie,
+	CharacterName,
+} from "./styles";
 
 interface CharactersProps {
 	characters: CharacterData[];
@@ -15,32 +24,47 @@ export const Character = (props: CharacterData) => {
 	const navigation = useReactNavigation();
 
 	return (
-		<TouchableOpacity
-			accessibilityRole="link"
+		<Link
+			style={{ alignItems: "center", marginTop: 32 }}
 			accessibilityHint={`Ver detalhes sobre ${props.name}`}
-			onPress={() => {
+			handleOnPress={() => {
 				navigation.navigate("Details", { id: props.id });
 			}}
 		>
-			<Image
-				source={{ uri: props.image, width: 200, height: 200 }}
+			<CharacterImage
+				source={{ uri: props.image, width: 230, height: 230 }}
 				resizeMode="contain"
 			/>
-			<View>
-				<Text>{props.name}</Text>
-				<Text>{props.species}</Text>
-			</View>
-		</TouchableOpacity>
+			<Texts>
+				<CharacterName>{props.name}</CharacterName>
+				<CharacterSpecie>{props.species}</CharacterSpecie>
+			</Texts>
+		</Link>
 	);
 };
 
-export const Characters = ({ characters, ...props }: CharactersProps) => (
-	<FlatList
-		data={characters}
-		renderItem={({ item }) => <Character {...item} />}
-		keyExtractor={({ id }) => id.toString()}
-		onEndReached={props.handleEndReached}
-		onEndReachedThreshold={0.1}
-		ListFooterComponent={() => <Loading />}
-	/>
-);
+export const Characters = ({ characters, ...props }: CharactersProps) => {
+	// Para melhorar o desempenho da lista.
+	const renderItem = useCallback(
+		({ item }: ListRenderItemInfo<CharacterData>) => {
+			return <Character {...item} />;
+		},
+		[]
+	);
+
+	const keyExtractor = useCallback(
+		({ id }: CharacterData) => id.toString(),
+		[]
+	);
+
+	return (
+		<List
+			data={characters}
+			renderItem={renderItem}
+			keyExtractor={keyExtractor}
+			onEndReached={props.handleEndReached}
+			onEndReachedThreshold={0.1}
+			ListFooterComponent={() => <Loading />}
+		/>
+	);
+};

@@ -12,6 +12,8 @@ import { DefaultLayout } from "../../layouts/DefaultLayout";
 import { BASE_URL, PAGE_LIMIT } from "../../constants";
 import { filterByName } from "../../utils/filterByName";
 
+import { Main } from "./styles";
+
 export const HomeScreen = () => {
 	const [searchValue, setSearchValue] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
@@ -31,15 +33,17 @@ export const HomeScreen = () => {
 
 	return (
 		<DefaultLayout>
-			<SearchBar value={searchValue} updateValue={setSearchValue} />
-			<Characters
-				characters={searchValue ? filteredData : data.results}
-				handleEndReached={() => {
-					if (currentPage === PAGE_LIMIT) return;
+			<Main>
+				<SearchBar value={searchValue} updateValue={setSearchValue} />
+				<Characters
+					characters={searchValue ? filteredData : data.results}
+					handleEndReached={() => {
+						if (currentPage === PAGE_LIMIT) return;
 
-					setCurrentPage((prev) => prev + 1);
-				}}
-			/>
+						setCurrentPage((prev) => prev + 1);
+					}}
+				/>
+			</Main>
 		</DefaultLayout>
 	);
 };
