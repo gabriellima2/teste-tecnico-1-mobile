@@ -1,6 +1,7 @@
 import { Text } from "react-native";
 
 import { DefaultLayout } from "../layouts/DefaultLayout";
+import { FullScreen } from "./FullScreen";
 
 interface ErrorProps {
 	message: string;
@@ -8,6 +9,8 @@ interface ErrorProps {
 
 export const Error = ({ message }: ErrorProps) => (
 	<DefaultLayout>
-		<Text>{message}</Text>
+		<FullScreen>
+			<Text>{message}</Text>
+		</FullScreen>
 	</DefaultLayout>
 );

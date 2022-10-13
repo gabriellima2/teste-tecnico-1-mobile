@@ -23,7 +23,7 @@ export const HomeScreen = () => {
 		{ keepPreviousData: true }
 	);
 
-	if (isLoading) return <Loading />;
+	if (isLoading) return <Loading onFullScreen={true} />;
 
 	if (error) return <Error message="Ocorreu um erro, desculpe!" />;
 
@@ -35,6 +35,7 @@ export const HomeScreen = () => {
 		<DefaultLayout>
 			<Main>
 				<SearchBar value={searchValue} updateValue={setSearchValue} />
+
 				<Characters
 					characters={searchValue ? filteredData : data.results}
 					handleEndReached={() => {
@@ -42,6 +43,9 @@ export const HomeScreen = () => {
 
 						setCurrentPage((prev) => prev + 1);
 					}}
+					handleShowLoading={
+						filteredData.length === 0 && currentPage !== PAGE_LIMIT
+					}
 				/>
 			</Main>
 		</DefaultLayout>

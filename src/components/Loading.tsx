@@ -1,9 +1,20 @@
 import { ActivityIndicator } from "react-native";
 
 import { DefaultLayout } from "../layouts/DefaultLayout";
+import { FullScreen } from "./FullScreen";
 
-export const Loading = () => (
+interface LoadingProps {
+	onFullScreen?: boolean;
+}
+
+export const Loading = (props: LoadingProps) => (
 	<DefaultLayout>
-		<ActivityIndicator />
+		{props.onFullScreen ? (
+			<FullScreen>
+				<ActivityIndicator />
+			</FullScreen>
+		) : (
+			<ActivityIndicator />
+		)}
 	</DefaultLayout>
 );

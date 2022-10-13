@@ -25,7 +25,7 @@ export const DetailsScreen = (props: DetailsScreenProps) => {
 
 	const { data, error, isLoading } = useFetch(`${BASE_URL}${characterID}`, []);
 
-	if (isLoading) return <Loading />;
+	if (isLoading) return <Loading onFullScreen={true} />;
 
 	if (error) return <Error message="Ocorreu um erro, desculpe!" />;
 
