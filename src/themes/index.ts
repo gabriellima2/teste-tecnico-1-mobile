@@ -8,10 +8,10 @@ export const themes = {
 	},
 
 	fonts: {
-		mainLight: "RobotoLight",
-		mainRegular: "RobotoMedium",
-		mainMedium: "RobotoMedium",
-		mainBold: "RobotoBold",
+		mainLight: "RubikLight",
+		mainRegular: "RubikMedium",
+		mainMedium: "RubikMedium",
+		mainBold: "RubikBold",
 	},
 
 	spaces: {

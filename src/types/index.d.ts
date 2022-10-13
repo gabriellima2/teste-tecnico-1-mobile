@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 
 export interface WithChildren {
 	children: ReactNode;
@@ -21,3 +22,5 @@ export interface CharacterDetailsData extends CharacterData {
 	};
 	episode: string[];
 }
+
+export type Style = StyleProp<ViewStyle>;

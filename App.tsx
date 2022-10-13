@@ -8,10 +8,10 @@ import { themes } from "./src/themes";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
-		RobotoLight: require("./assets/fonts/Roboto-Light.ttf"),
-		RobotoRegular: require("./assets/fonts/Roboto-Regular.ttf"),
-		RobotoMedium: require("./assets/fonts/Roboto-Medium.ttf"),
-		RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
+		RubikLight: require("./assets/fonts/Rubik-Light.ttf"),
+		RubikRegular: require("./assets/fonts/Rubik-Regular.ttf"),
+		RubikMedium: require("./assets/fonts/Rubik-Medium.ttf"),
+		RubikBold: require("./assets/fonts/Rubik-Bold.ttf"),
 	});
 
 	if (!fontsLoaded) return <Loading />;
