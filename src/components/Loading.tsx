@@ -1,3 +1,9 @@
-import { Text } from "react-native";
+import { ActivityIndicator } from "react-native";
 
-export const Loading = () => <Text>Carregando...</Text>;
+import { DefaultLayout } from "../layouts/DefaultLayout";
+
+export const Loading = () => (
+	<DefaultLayout>
+		<ActivityIndicator />
+	</DefaultLayout>
+);
