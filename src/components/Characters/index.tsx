@@ -1,5 +1,5 @@
-import { ListRenderItemInfo } from "react-native";
 import { useCallback } from "react";
+import type { ListRenderItemInfo } from "react-native";
 
 import { useReactNavigation } from "../../hooks/useReactNavigation";
 
@@ -18,6 +18,7 @@ import {
 interface CharactersProps {
 	characters: CharacterData[];
 	handleEndReached: () => void;
+	handleShowLoading: boolean;
 }
 
 export const Character = (props: CharacterData) => {
@@ -25,7 +26,7 @@ export const Character = (props: CharacterData) => {
 
 	return (
 		<Link
-			style={{ alignItems: "center", marginTop: 32 }}
+			style={{ alignItems: "center", marginTop: 24, marginBottom: 16 }}
 			accessibilityHint={`Ver detalhes sobre ${props.name}`}
 			handleOnPress={() => {
 				navigation.navigate("Details", { id: props.id });
@@ -57,14 +58,16 @@ export const Characters = ({ characters, ...props }: CharactersProps) => {
 		[]
 	);
 
+	const showLoading = useCallback(() => <Loading />, []);
+
 	return (
 		<List
 			data={characters}
 			renderItem={renderItem}
 			keyExtractor={keyExtractor}
 			onEndReached={props.handleEndReached}
-			onEndReachedThreshold={0.1}
-			ListFooterComponent={() => <Loading />}
+			onEndReachedThreshold={0.4}
+			ListFooterComponent={props.handleShowLoading ? showLoading : null}
 		/>
 	);
 };

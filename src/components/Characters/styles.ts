@@ -2,6 +2,7 @@ import styled, { css } from "styled-components/native";
 
 export const List = styled.FlatList`
 	width: 100%;
+	flex: 1;
 `;
 
 export const CharacterImage = styled.Image`
