@@ -1,4 +1,4 @@
-import { FlatList, Image, Text } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity } from "react-native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { useFetch } from "../../hooks/useFetch";
@@ -14,6 +14,7 @@ import {
 	StatusInfoInPortuguese,
 } from "../../constants";
 import type { RootStackParamList } from "../../Routes";
+import { BackButton } from "../../components/BackButton";
 
 type DetailsScreenProps = NativeStackScreenProps<RootStackParamList, "Details">;
 
@@ -50,6 +51,8 @@ export const DetailsScreen = (props: DetailsScreenProps) => {
 				)}
 				keyExtractor={({ title }) => title}
 			/>
+
+			<BackButton />
 
 			<Text>{data.episode.length} Episódio(s)</Text>
 		</DefaultLayout>
