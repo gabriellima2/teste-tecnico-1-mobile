@@ -8,7 +8,7 @@ import { Error } from "../../components/Error";
 
 import { DefaultLayout } from "../../layouts/DefaultLayout";
 
-import { BASE_URL, PAGE_LIMIT } from "../../contants";
+import { BASE_URL, PAGE_LIMIT } from "../../constants";
 
 export const HomeScreen = () => {
 	const [currentPage, setCurrentPage] = useState(1);
