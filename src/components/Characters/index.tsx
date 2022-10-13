@@ -17,8 +17,8 @@ import {
 
 interface CharactersProps {
 	characters: CharacterData[];
-	handleEndReached: () => void;
-	handleShowLoading: boolean;
+	handleEndReached?: () => void;
+	handleShowLoading?: boolean;
 }
 
 export const Character = (props: CharacterData) => {

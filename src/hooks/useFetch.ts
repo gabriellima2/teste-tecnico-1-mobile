@@ -36,11 +36,12 @@ export function useFetch<T extends Data & CharacterDetailsData>(
 		(async () => {
 			try {
 				const response = await fetch(url);
-				const apiData: T = await response.json();
+				const apiData: T & { error: string } = await response.json();
+
+				if (apiData.error) throw new Error();
 
 				handleResponseData(apiData);
 			} catch (err) {
-				console.log(err);
 				setError(true);
 			} finally {
 				setIsLoading(false);

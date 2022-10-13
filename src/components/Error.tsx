@@ -10,7 +10,7 @@ interface ErrorProps {
 export const Error = ({ message }: ErrorProps) => (
 	<DefaultLayout>
 		<FullScreen>
-			<Text>{message}</Text>
+			<Text accessibilityRole="alert">{message}</Text>
 		</FullScreen>
 	</DefaultLayout>
 );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { useFetch } from "../../hooks/useFetch";
+import { useReactNavigation } from "../../hooks/useReactNavigation";
 
 import { Characters } from "../../components/Characters";
 import { SearchBar } from "../../components/SearchBar";
@@ -10,12 +11,12 @@ import { Error } from "../../components/Error";
 import { DefaultLayout } from "../../layouts/DefaultLayout";
 
 import { BASE_URL, PAGE_LIMIT } from "../../constants";
-import { filterByName } from "../../utils/filterByName";
 
 import { Main } from "./styles";
 
 export const HomeScreen = () => {
-	const [searchValue, setSearchValue] = useState("");
+	const navigation = useReactNavigation();
+
 	const [currentPage, setCurrentPage] = useState(1);
 	const { data, error, isLoading } = useFetch(
 		`${BASE_URL}?page=${currentPage}`,
@@ -23,29 +24,28 @@ export const HomeScreen = () => {
 		{ keepPreviousData: true }
 	);
 
+	const handleSearch = (value: string) => {
+		if (!value.trim()) return;
+		navigation.navigate("Search", { value: value });
+	};
+
 	if (isLoading) return <Loading onFullScreen={true} />;
 
 	if (error) return <Error message="Ocorreu um erro, desculpe!" />;
 
-	const filteredData = searchValue
-		? filterByName(data.results, searchValue)
-		: [];
-
 	return (
 		<DefaultLayout>
 			<Main>
-				<SearchBar value={searchValue} updateValue={setSearchValue} />
+				<SearchBar handleOnPress={handleSearch} />
 
 				<Characters
-					characters={searchValue ? filteredData : data.results}
+					characters={data.results}
 					handleEndReached={() => {
 						if (currentPage === PAGE_LIMIT) return;
 
 						setCurrentPage((prev) => prev + 1);
 					}}
-					handleShowLoading={
-						filteredData.length === 0 && currentPage !== PAGE_LIMIT
-					}
+					handleShowLoading={currentPage !== PAGE_LIMIT}
 				/>
 			</Main>
 		</DefaultLayout>
