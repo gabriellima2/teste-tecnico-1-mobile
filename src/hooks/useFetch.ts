@@ -1,16 +1,16 @@
 import { DependencyList, useEffect, useState } from "react";
 
-import type { CharacterData } from "../types";
+import type { CharacterData, CharacterDetailsData } from "../types";
 
 interface Data {
 	results: CharacterData[];
 }
 
 export interface UseFetchOptions {
-	keepPreviousData: boolean;
+	keepPreviousData?: boolean;
 }
 
-export function useFetch<T extends Data>(
+export function useFetch<T extends Data & CharacterDetailsData>(
 	url: string,
 	deps: DependencyList,
 	options?: UseFetchOptions
@@ -22,7 +22,7 @@ export function useFetch<T extends Data>(
 	const handleResponseData = (responseData: T) => {
 		const havePreviousData = Object.keys(data).length > 0;
 
-		if (options.keepPreviousData && havePreviousData) {
+		if (options?.keepPreviousData && havePreviousData) {
 			return setData((prev) => ({
 				...prev,
 				results: [...prev.results, ...responseData.results],
@@ -40,6 +40,7 @@ export function useFetch<T extends Data>(
 
 				handleResponseData(apiData);
 			} catch (err) {
+				console.log(err);
 				setError(true);
 			} finally {
 				setIsLoading(false);

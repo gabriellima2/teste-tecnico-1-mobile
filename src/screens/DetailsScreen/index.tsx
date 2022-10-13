@@ -14,17 +14,13 @@ import {
 	StatusInfoInPortuguese,
 } from "../../constants";
 import type { RootStackParamList } from "../../Routes";
-import type { CharacterDetailsData } from "../../types";
 
 type DetailsScreenProps = NativeStackScreenProps<RootStackParamList, "Details">;
 
 export const DetailsScreen = (props: DetailsScreenProps) => {
 	const characterID = props.route.params.id;
 
-	const { data, error, isLoading } = useFetch<CharacterDetailsData>(
-		`${BASE_URL}${characterID}`,
-		[]
-	);
+	const { data, error, isLoading } = useFetch(`${BASE_URL}${characterID}`, []);
 
 	if (isLoading) return <Loading />;
 
