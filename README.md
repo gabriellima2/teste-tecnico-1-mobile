@@ -8,7 +8,7 @@
 - Listar os dados ✔️
 - Rota de detalhes ✔️
 
-Meus complementos: Barra de Pesquisar e Scroll Infinito.
+Meus complementos: Barra de Pesquisa e Scroll Infinito.
 
 
 <h2>Tecnologias:</h2>
