@@ -33,8 +33,6 @@ export function useFetch<T extends Data & CharacterDetailsData>(
 	};
 
 	useEffect(() => {
-		if (!isLoading) return;
-
 		(async () => {
 			try {
 				const response = await fetch(url);
