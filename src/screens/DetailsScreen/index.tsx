@@ -1,10 +1,11 @@
-import { FlatList, Image, Text, TouchableOpacity } from "react-native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { useFetch } from "../../hooks/useFetch";
 
 import { Error } from "../../components/Error";
+import { MyImage } from "../../components/Image";
 import { Loading } from "../../components/Loading";
+import { BackButton } from "../../components/BackButton";
 
 import { DefaultLayout } from "../../layouts/DefaultLayout";
 
@@ -14,7 +15,8 @@ import {
 	StatusInfoInPortuguese,
 } from "../../constants";
 import type { RootStackParamList } from "../../Routes";
-import { BackButton } from "../../components/BackButton";
+
+import { Episode, Header, Main, TextInfo, Title, Texts, Span } from "./styles";
 
 type DetailsScreenProps = NativeStackScreenProps<RootStackParamList, "Details">;
 
@@ -36,25 +38,25 @@ export const DetailsScreen = (props: DetailsScreenProps) => {
 
 	return (
 		<DefaultLayout>
-			<Image
-				source={{ uri: data.image, width: 200, height: 200 }}
-				resizeMode="contain"
-			/>
-			<Text>{data.name}</Text>
+			<Header>
+				<BackButton style={{ position: "absolute", left: 0 }} />
 
-			<FlatList
-				data={textsInfo}
-				renderItem={({ item }) => (
-					<Text>
-						{item.title}: {item.value}
-					</Text>
-				)}
-				keyExtractor={({ title }) => title}
-			/>
+				<Title>{data.name}</Title>
+			</Header>
 
-			<BackButton />
+			<Main>
+				<MyImage uri={data.image} width={290} height={290} />
 
-			<Text>{data.episode.length} Episódio(s)</Text>
+				<Texts>
+					{textsInfo.map((text, index) => (
+						<TextInfo key={index}>
+							{text.title}: <Span>{text.value}</Span>
+						</TextInfo>
+					))}
+				</Texts>
+
+				<Episode>{data.episode.length} Episódio(s)</Episode>
+			</Main>
 		</DefaultLayout>
 	);
 };

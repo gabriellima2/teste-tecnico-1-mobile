@@ -1,9 +1,9 @@
-import { TouchableOpacity, StyleProp, ViewStyle } from "react-native";
-import type { WithChildren } from "../types";
+import { TouchableOpacity } from "react-native";
+import type { WithChildren, Style } from "../types";
 
 interface LinkProps extends WithChildren {
 	accessibilityHint: string;
-	style?: StyleProp<ViewStyle>;
+	style?: Style;
 	handleOnPress: () => void;
 }
 
