@@ -7,6 +7,17 @@ export interface WithChildren {
 export interface CharacterData {
 	id: number;
 	name: string;
-	species: "Human" | "Alien";
+	species: "Human" | "Alien" | "unknown";
 	image: string;
+}
+
+export interface CharacterDetailsData extends CharacterData {
+	status: "Dead" | "Alive" | "unknown";
+	origin: {
+		name: string;
+	};
+	location: {
+		name: string;
+	};
+	episode: string[];
 }
