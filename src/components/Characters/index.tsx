@@ -1,6 +1,6 @@
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 
-import { useReactNavigation } from "../../Routes";
+import { useReactNavigation } from "../../hooks/useReactNavigation";
 
 import { Loading } from "../Loading";
 
