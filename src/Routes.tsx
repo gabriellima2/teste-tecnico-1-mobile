@@ -3,11 +3,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { DetailsScreen } from "./screens/DetailsScreen";
 import { HomeScreen } from "./screens/HomeScreen";
-import { SearchScreen } from "./screens/SearchScreen";
+import { ResultSearchScreen } from "./screens/ResultSearchScreen";
 
 export type RootStackParamList = {
 	Details: { id: number };
-	Search: { value: string };
+	Result: { value: string };
 };
 
 const Stack = createNativeStackNavigator();
@@ -20,7 +20,7 @@ export const Routes = () => (
 		>
 			<Stack.Screen name="Home" component={HomeScreen} />
 			<Stack.Screen name="Details" component={DetailsScreen} />
-			<Stack.Screen name="Search" component={SearchScreen} />
+			<Stack.Screen name="Result" component={ResultSearchScreen} />
 		</Stack.Navigator>
 	</NavigationContainer>
 );

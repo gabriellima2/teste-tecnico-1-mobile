@@ -26,7 +26,7 @@ export const HomeScreen = () => {
 
 	const handleSearch = (value: string) => {
 		if (!value.trim()) return;
-		navigation.navigate("Search", { value: value });
+		navigation.navigate("Result", { value: value });
 	};
 
 	if (isLoading) return <Loading onFullScreen={true} />;

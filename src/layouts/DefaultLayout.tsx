@@ -21,7 +21,7 @@ const Content = styled.View`
 export const DefaultLayout = ({ children }: WithChildren) => (
 	<SafeAreaView style={{ flex: 1 }}>
 		<Container>
-			<StatusBar style="auto" />
+			<StatusBar style="light" />
 			<Content>{children}</Content>
 		</Container>
 	</SafeAreaView>
