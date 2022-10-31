@@ -12,6 +12,10 @@ export interface CharacterData {
 	image: string;
 }
 
+export interface CharactersData {
+	results: CharacterData[];
+}
+
 export interface CharacterDetailsData extends CharacterData {
 	status: "Dead" | "Alive" | "unknown";
 	origin: {

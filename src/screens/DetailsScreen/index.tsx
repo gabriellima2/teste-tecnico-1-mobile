@@ -1,16 +1,15 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { useFetch } from "../../hooks/useFetch";
+import { useSpecificCharacter } from "../../hooks/useSpecificCharacter";
 
-import { Error } from "../../components/Error";
-import { MyImage } from "../../components/Image";
-import { Loading } from "../../components/Loading";
 import { BackButton } from "../../components/BackButton";
+import { Loading } from "../../components/Loading";
+import { MyImage } from "../../components/Image";
+import { Error } from "../../components/Error";
 
 import { DefaultLayout } from "../../layouts/DefaultLayout";
 
 import {
-	BASE_URL,
 	SpecieInfoInPortuguese,
 	StatusInfoInPortuguese,
 } from "../../constants";
@@ -22,10 +21,9 @@ type DetailsScreenProps = NativeStackScreenProps<RootStackParamList, "Details">;
 
 export const DetailsScreen = (props: DetailsScreenProps) => {
 	const characterID = props.route.params.id;
+	const { data, error, isLoading } = useSpecificCharacter.ByID(characterID);
 
-	const { data, error, isLoading } = useFetch(`${BASE_URL}${characterID}`, []);
-
-	if (isLoading) return <Loading onFullScreen={true} />;
+	if (isLoading) return <Loading onFullScreen />;
 
 	if (error) return <Error message="Ocorreu um erro, desculpe!" />;
 

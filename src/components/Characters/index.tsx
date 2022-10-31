@@ -28,7 +28,7 @@ export const Character = (props: CharacterData) => {
 		<Link
 			style={{ alignItems: "center", marginTop: 24, marginBottom: 16 }}
 			accessibilityHint={`Ver detalhes sobre ${props.name}`}
-			handleOnPress={() => {
+			onPress={() => {
 				navigation.navigate("Details", { id: props.id });
 			}}
 		>

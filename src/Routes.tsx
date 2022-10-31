@@ -1,9 +1,9 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 
+import { SearchResultScreen } from "./screens/SearchResultScreen";
 import { DetailsScreen } from "./screens/DetailsScreen";
 import { HomeScreen } from "./screens/HomeScreen";
-import { ResultSearchScreen } from "./screens/ResultSearchScreen";
 
 export type RootStackParamList = {
 	Details: { id: number };
@@ -20,7 +20,7 @@ export const Routes = () => (
 		>
 			<Stack.Screen name="Home" component={HomeScreen} />
 			<Stack.Screen name="Details" component={DetailsScreen} />
-			<Stack.Screen name="Result" component={ResultSearchScreen} />
+			<Stack.Screen name="Result" component={SearchResultScreen} />
 		</Stack.Navigator>
 	</NavigationContainer>
 );

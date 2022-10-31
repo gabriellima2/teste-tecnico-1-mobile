@@ -1,15 +1,12 @@
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components/native";
+import type { TouchableOpacityProps } from "react-native";
 
 import { useReactNavigation } from "../hooks/useReactNavigation";
 
 import { Icon } from "./Icon";
 
-import type { Style } from "../types";
-
-interface BackButtonProps {
-	style?: Style;
-}
+interface BackButtonProps extends Pick<TouchableOpacityProps, "style"> {}
 
 export const BackButton = (props: BackButtonProps) => {
 	const navigation = useReactNavigation();

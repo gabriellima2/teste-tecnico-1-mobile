@@ -15,7 +15,10 @@ export const Error = ({ message }: ErrorProps) => {
 	return (
 		<DefaultLayout>
 			<FullScreen>
-				<Text accessibilityRole="alert" style={{ color: theme.colors.font }}>
+				<Text
+					accessibilityRole="alert"
+					style={{ color: theme.colors.font, textAlign: "center" }}
+				>
 					{message}
 				</Text>
 			</FullScreen>

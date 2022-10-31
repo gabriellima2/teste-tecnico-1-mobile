@@ -1,31 +1,30 @@
 import { DependencyList, useEffect, useState } from "react";
 
-import type { CharacterData, CharacterDetailsData } from "../types";
-
-interface Data {
-	results: CharacterData[];
-}
+import type { CharactersData } from "../types";
 
 export interface UseFetchOptions {
 	keepPreviousData?: boolean;
 }
 
-export function useFetch<T extends Data & CharacterDetailsData>(
+export function useFetch<T>(
 	url: string,
 	deps: DependencyList,
 	options?: UseFetchOptions
 ) {
-	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState({} as T);
 	const [error, setError] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleResponseData = (responseData: T) => {
 		const havePreviousData = Object.keys(data).length > 0;
 
-		if (options?.keepPreviousData && havePreviousData) {
-			return setData((prev) => ({
-				...prev,
-				results: [...prev.results, ...responseData.results],
+		if (havePreviousData && options?.keepPreviousData) {
+			return setData((prevState) => ({
+				...prevState,
+				results: [
+					...(prevState as CharactersData).results,
+					...(responseData as CharactersData).results,
+				],
 			}));
 		}
 
@@ -35,12 +34,11 @@ export function useFetch<T extends Data & CharacterDetailsData>(
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await fetch(url);
-				const apiData: T & { error: string } = await response.json();
+				const response: T & { error: string } = await (await fetch(url)).json();
 
-				if (apiData.error) throw new Error();
+				if (response.error) throw new Error();
 
-				handleResponseData(apiData);
+				handleResponseData(response);
 			} catch (err) {
 				setError(true);
 			} finally {

@@ -1,6 +1,8 @@
 import { useTheme } from "styled-components/native";
 import { useState } from "react";
 
+import { useReactNavigation } from "../../hooks/useReactNavigation";
+
 import { BackButton } from "../BackButton";
 import { Icon } from "../Icon";
 
@@ -8,17 +10,23 @@ import { Container, Input, SearchButton } from "./styles";
 
 interface SearchBarProps {
 	initialValue?: string;
-	withBackButton?: boolean;
-	handleOnPress: (valueSearch: string) => void;
+	showBackButton?: boolean;
 }
 
 export const SearchBar = (props: SearchBarProps) => {
 	const [searchValue, setSearchValue] = useState(props.initialValue || "");
+	const navigation = useReactNavigation();
 	const theme = useTheme();
+
+	const handlePress = () => {
+		if (!searchValue.trim()) return;
+
+		navigation.navigate("Result", { value: searchValue });
+	};
 
 	return (
 		<Container>
-			{props.withBackButton && <BackButton style={{ marginRight: 8 }} />}
+			{props.showBackButton && <BackButton style={{ marginRight: 8 }} />}
 
 			<Input
 				autoCapitalize="none"
@@ -30,10 +38,10 @@ export const SearchBar = (props: SearchBarProps) => {
 				accessibilityHint="Mostrará o resultado "
 				placeholderTextColor={`${theme.colors.font}4b`}
 				onChangeText={setSearchValue}
-				onSubmitEditing={() => props.handleOnPress(searchValue)}
+				onSubmitEditing={handlePress}
 			/>
 			<SearchButton
-				onPress={() => props.handleOnPress(searchValue)}
+				onPress={handlePress}
 				accessibilityLabel="Buscar"
 				accessibilityHint="Mostrará o resultado da sua busca"
 			>
